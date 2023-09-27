@@ -110,15 +110,7 @@ const styles = StyleSheet.create({
   gameScreen: {
     flex: 1,
     padding: 24,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#ddb52f",
-    textAlign: "center",
-    borderWidth: 2,
-    borderColor: "#ddb52f",
-    padding: 12,
+    alignItems: "center",
   },
   instructionText: {
     marginBottom: 12,
