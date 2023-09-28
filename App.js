@@ -21,7 +21,7 @@ export default function App() {
 
   //Deprecated, needs to be changed
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return;
   }
 
   function pickedNumberHandler(pickedNumber) {
