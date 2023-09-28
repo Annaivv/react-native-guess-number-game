@@ -44,9 +44,9 @@ function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }) {
   if (width > 500) {
     content = (
       <>
-        <Text>
-          <Title>GAME OVER!</Title>
-        </Text>
+        <Title>
+          <Text>GAME OVER!</Text>
+        </Title>
 
         <View style={styles.contentContainer}>
           <View style={[styles.imageContainer, styles.imageContainerWide]}>
