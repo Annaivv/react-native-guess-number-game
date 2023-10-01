@@ -3,7 +3,7 @@ import {
   Text,
   View,
   StyleSheet,
-  Dimensions,
+  ScrollView,
   useWindowDimensions,
 } from "react-native";
 import Title from "../components/ui/Title";
@@ -13,67 +13,62 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }) {
   const { width, height } = useWindowDimensions();
 
-  // let imageSize = 300;
-  // let contentDirection = "column";
+  let imageSize = 300;
+  let flexContentDirection = "column";
+  let textWidth = "100%";
 
-  // if (width < 380 && height < 400) {
-  //   imageSize = 150;
-  //   contentDirection = "row"
-  // }
+  if (width < 380) {
+    imageSize = 150;
+  }
 
-  let content = (
-    <>
-      <Title>GAME OVER!</Title>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          source={require("../assets/images/success.png")}
-        />
-      </View>
-      <View>
-        <Text style={styles.summaryText}>
-          Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text>{" "}
-          rounds to guess the number{" "}
-          <Text style={styles.highlight}>{userNumber}</Text>
-        </Text>
-        <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
-      </View>
-    </>
-  );
+  if (height < 400) {
+    imageSize = 150;
+    flexContentDirection = "row";
+    textWidth = "70%";
+  }
 
-  if (width > 500) {
-    content = (
-      <>
-        <Title>
-          <Text>GAME OVER!</Text>
-        </Title>
+  const imageStyle = {
+    width: imageSize,
+    height: imageSize,
+    borderRadius: imageSize / 2,
+  };
 
-        <View style={styles.contentContainer}>
-          <View style={[styles.imageContainer, styles.imageContainerWide]}>
+  const contentStyle = {
+    flexDirection: flexContentDirection,
+  };
+
+  const summaryStyle = {
+    width: textWidth,
+    alignSelf: "center",
+  };
+
+  return (
+    <ScrollView>
+      <View style={styles.rootContainer}>
+        <Title>GAME OVER!</Title>
+        <View style={[styles.contentContainer, contentStyle]}>
+          <View style={[styles.imageContainer, imageStyle]}>
             <Image
               style={styles.image}
               source={require("../assets/images/success.png")}
             />
           </View>
-          <Text style={[styles.summaryText, styles.summaryTextWide]}>
-            Your phone needed{" "}
-            <Text style={styles.highlight}>{roundsNumber}</Text> rounds to guess
-            the number <Text style={styles.highlight}>{userNumber}</Text>
-          </Text>
+          <View>
+            <Text style={[styles.summaryText, summaryStyle]}>
+              Your phone needed{" "}
+              <Text style={styles.highlight}>{roundsNumber}</Text> rounds to
+              guess the number{" "}
+              <Text style={styles.highlight}>{userNumber}</Text>
+            </Text>
+          </View>
         </View>
-        <View>
-          <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
-        </View>
-      </>
-    );
-  }
-
-  return <View style={styles.rootContainer}>{content}</View>;
+        <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
+      </View>
+    </ScrollView>
+  );
 }
 
 export default GameOverScreen;
-
-const deviceWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -83,26 +78,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   contentContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
     alignItems: "center",
-    padding: 36,
-    gap: 36,
   },
   imageContainer: {
-    width: deviceWidth < 380 ? 150 : 300,
-    height: deviceWidth < 380 ? 150 : 300,
-    borderRadius: deviceWidth < 380 ? 75 : 150,
     borderWidth: 3,
     borderColor: Colors.primary800,
     overflow: "hidden",
     margin: 36,
-  },
-  imageContainerWide: {
-    width: 150,
-    height: 150,
-    margin: 4,
-    // flex: 1,
   },
   image: {
     width: "100%",
@@ -113,9 +96,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     marginBottom: 24,
-  },
-  summaryTextWide: {
-    flex: 2,
   },
   highlight: {
     fontFamily: "open-sans-bold",
