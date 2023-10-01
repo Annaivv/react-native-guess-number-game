@@ -43,7 +43,7 @@ function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }) {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.screen}>
       <View style={styles.rootContainer}>
         <Title>GAME OVER!</Title>
         <View style={[styles.contentContainer, contentStyle]}>
@@ -71,6 +71,9 @@ function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }) {
 export default GameOverScreen;
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   rootContainer: {
     flex: 1,
     padding: 24,
